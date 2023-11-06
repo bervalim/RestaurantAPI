@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Client from "./Client.entity";
+import Restaurant from "./Restaurant.entity";
 
 @Entity("bookings")
 export default class Booking {
@@ -13,4 +15,10 @@ export default class Booking {
 
   @PrimaryGeneratedColumn("uuid")
   bookingCode: string;
+
+  @ManyToOne(() => Client, (clients) => clients.bookings)
+  client: Client;
+
+  @ManyToOne(() => Restaurant, (restaurants) => restaurants.bookings)
+  restaurant: Restaurant;
 }
