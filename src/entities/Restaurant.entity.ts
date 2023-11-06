@@ -2,11 +2,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import Booking from "./Booking.entity";
+import Address from "./Address.entity";
 
 @Entity("restaurants")
 export default class Restaurant {
@@ -33,4 +36,8 @@ export default class Restaurant {
 
   @OneToMany(() => Booking, (bookings) => bookings.restaurant)
   bookings: Booking[];
+
+  @OneToOne(() => Address, (addresses) => addresses.restaurant)
+  @JoinColumn()
+  address: Address;
 }

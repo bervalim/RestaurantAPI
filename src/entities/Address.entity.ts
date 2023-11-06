@@ -1,7 +1,8 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import Restaurant from "./Restaurant.entity";
 
 @Entity("addresses")
-export default class Adress {
+export default class Address {
   @PrimaryGeneratedColumn("increment")
   id: number;
 
@@ -22,4 +23,7 @@ export default class Adress {
 
   @Column({ length: 30 })
   neighborhood: string;
+
+  @OneToOne(() => Restaurant, (restaurants) => restaurants.address)
+  restaurant: Restaurant;
 }
