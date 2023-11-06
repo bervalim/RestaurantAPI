@@ -3,6 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  ManyToOne,
   OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
@@ -10,6 +11,7 @@ import {
 } from "typeorm";
 import Booking from "./Booking.entity";
 import Address from "./Address.entity";
+import Category from "./Category.entity";
 
 @Entity("restaurants")
 export default class Restaurant {
@@ -40,4 +42,7 @@ export default class Restaurant {
   @OneToOne(() => Address, (addresses) => addresses.restaurant)
   @JoinColumn()
   address: Address;
+
+  @ManyToOne(() => Category, (categories) => categories.restaurants)
+  category: Category;
 }
