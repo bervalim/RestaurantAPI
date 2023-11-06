@@ -3,9 +3,11 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Booking from "./Booking.entity";
 
 @Entity("clients")
 export default class Client {
@@ -32,4 +34,7 @@ export default class Client {
 
   @DeleteDateColumn({ type: "date" })
   deletedAt: string | null;
+
+  @OneToMany(() => Booking, (bookings) => bookings.client)
+  bookings: Booking[];
 }
