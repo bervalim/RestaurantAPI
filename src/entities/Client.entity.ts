@@ -1,14 +1,16 @@
 import {
+  BeforeInsert,
+  BeforeUpdate,
   Column,
   CreateDateColumn,
   DeleteDateColumn,
   Entity,
-  ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import Booking from "./Booking.entity";
+import { getRounds, hashSync } from "bcryptjs";
 
 @Entity("clients")
 export default class Client {
@@ -38,4 +40,11 @@ export default class Client {
 
   @OneToMany(() => Booking, (bookings) => bookings.client)
   bookings: Booking[];
+
+  @BeforeInsert()
+  @BeforeUpdate()
+  hashPassword() {
+    const hasRounds: number = getRounds(this.password);
+    if (!hasRounds) this.password = hashSync(this.password, 10);
+  }
 }
