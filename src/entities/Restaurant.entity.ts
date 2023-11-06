@@ -2,9 +2,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import Booking from "./Booking.entity";
 
 @Entity("restaurants")
 export default class Restaurant {
@@ -28,4 +30,7 @@ export default class Restaurant {
 
   @UpdateDateColumn({ type: "date" })
   updateInfo: string;
+
+  @OneToMany(() => Booking, (bookings) => bookings.restaurant)
+  bookings: Booking[];
 }
