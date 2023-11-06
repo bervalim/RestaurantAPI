@@ -42,7 +42,7 @@ export default class Restaurant {
   @OneToOne(() => Address, (addresses) => addresses.restaurant)
   @JoinColumn()
   address: Address;
-
+  // wkwk
   @ManyToOne(() => Category, (categories) => categories.restaurants)
   category: Category;
 }
