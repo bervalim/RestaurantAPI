@@ -1,6 +1,12 @@
 import { Request, Response } from "express";
-import { TcreateClientResponse } from "../interfaces/clients.interface";
-import { createClientService } from "../services/clients.service";
+import {
+  TcreateClientResponse,
+  TreadClientResponse,
+} from "../interfaces/clients.interface";
+import {
+  createClientService,
+  readAllClientsService,
+} from "../services/clients.service";
 
 export const createClientController = async (
   req: Request,
@@ -13,7 +19,7 @@ export const createClientController = async (
 export const readAllClientsController = async (
   req: Request,
   res: Response
-): Promise<Response>=>{
-  const clients:
-
-}
+): Promise<Response> => {
+  const clients: TreadClientResponse = await readAllClientsService();
+  return res.status(200).json(clients);
+};
