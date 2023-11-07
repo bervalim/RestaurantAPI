@@ -22,10 +22,24 @@ export const verifyToken = (
   // No headers, teremos Bearer 92104eu3r4ufhaiodefhfuhfurw
   // Com esse split,faremos a separação do token do bearer e teremos acesso a ele
   const token: string = authorization.split(" ")[1];
+  // Divide o valor do cabeçalho de autorização usando o espaço como delimitador e pega o segundo elemento do array resultante. Normalmente, tokens de Bearer são enviados no formato "Bearer <token>". Essa linha extrai apenas o token.
   // Decodificará o token e verificará se o usuário está logado na aplicação
+  // Através desta decodificação, iremos verificar se o usuário está logado
   const decodedToken = verify(token, process.env.SECRET_KEY!);
   // Guardando o token decodificado no res.locals
   res.locals = { ...res.locals, decodedToken };
+
+  return next();
+};
+
+export const verifyAdmin = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { admin } = res.locals.decodedToken;
+
+  if (!admin) throw new AppError("Insuficcient Permissions", 403);
 
   return next();
 };
