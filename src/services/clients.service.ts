@@ -2,9 +2,13 @@ import Client from "../entities/Client.entity";
 import {
   TcreateClientRequest,
   TcreateClientResponse,
+  TreadClientResponse,
 } from "../interfaces/clients.interface";
 import { clientRepo } from "../repositories";
-import { createClientResponseSchema } from "../schemas/clients.schema";
+import {
+  clientsListResponseSchema,
+  createClientResponseSchema,
+} from "../schemas/clients.schema";
 
 export const createClientService = async (
   requestBody: TcreateClientRequest
@@ -14,4 +18,9 @@ export const createClientService = async (
   await clientRepo.save(newClient);
 
   return createClientResponseSchema.parse(newClient);
+};
+
+export const readAllClientsService = async (): Promise<TreadClientResponse> => {
+  const clients: TreadClientResponse = await clientRepo.find();
+  return clientsListResponseSchema.parse(clients);
 };
