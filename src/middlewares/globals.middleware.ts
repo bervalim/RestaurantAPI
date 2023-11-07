@@ -43,3 +43,19 @@ export const verifyAdmin = (
 
   return next();
 };
+
+export const verifyPermission = (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): void => {
+  const { id } = req.params;
+
+  const { admin, sub } = res.locals.decodedToken;
+
+  if (admin) return next();
+
+  if (sub !== id) throw new AppError("Insuficcient Permissions", 403);
+
+  return next();
+};
