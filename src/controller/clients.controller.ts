@@ -6,6 +6,7 @@ import {
 import {
   createClientService,
   readAllClientsService,
+  updateClientService,
 } from "../services/clients.service";
 
 export const createClientController = async (
@@ -22,4 +23,13 @@ export const readAllClientsController = async (
 ): Promise<Response> => {
   const clients: TreadClientResponse = await readAllClientsService();
   return res.status(200).json(clients);
+};
+
+export const updateClientController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { findClient } = res.locals;
+  const updatedClient = await updateClientService(req.body, findClient);
+  return res.status(200).json(updatedClient);
 };
