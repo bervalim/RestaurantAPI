@@ -19,3 +19,21 @@ export const verifyClientEmailIsUnique = async (
 
   return next();
 };
+
+export const verifyClientIdExists = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { id } = req.params;
+
+  const findClient: Client | null = await clientRepo.findOneBy({
+    id: Number(id),
+  });
+
+  if (!findClient) throw new AppError("Client not found!", 404);
+
+  res.locals = { ...res.locals, findClient };
+
+  return next();
+};
