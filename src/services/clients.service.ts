@@ -29,7 +29,7 @@ export const readAllClientsService = async (): Promise<TreadClientResponse> => {
 export const updateClientService = async (
   requestBody: TupdateClientRequest,
   client: Client
-) => {
+): Promise<TcreateClientResponse> => {
   const updatedClient: Client = clientRepo.create({
     ...client,
     ...requestBody,
@@ -38,4 +38,10 @@ export const updateClientService = async (
   await clientRepo.save(updatedClient);
 
   return createClientResponseSchema.parse(updatedClient);
+};
+
+export const softDeleteClientService = async (
+  client: Client
+): Promise<void> => {
+  await clientRepo.softRemove(client);
 };

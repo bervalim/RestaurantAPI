@@ -36,4 +36,9 @@ clientRouter.patch(
   verifyPermission,
   updateClientController
 );
-clientRouter.delete("/:id");
+clientRouter.delete(
+  "/:id",
+  verifyToken,
+  verifyClientIdExists,
+  verifyPermission
+);
