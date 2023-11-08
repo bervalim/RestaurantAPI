@@ -20,3 +20,5 @@ clientRouter.post(
   createClientController
 );
 clientRouter.get("/", verifyToken, verifyAdmin, readAllClientsController);
+clientRouter.patch("/:id");
+clientRouter.delete("/:id");

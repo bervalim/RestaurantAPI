@@ -26,7 +26,6 @@ export const verifyToken = (
   const decodedToken = verify(token, process.env.SECRET_KEY!);
 
   res.locals = { ...res.locals, decodedToken };
-  console.log(decodedToken);
 
   return next();
 };
