@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createClientController,
   readAllClientsController,
+  softDeleteClientController,
   updateClientController,
 } from "../controller/clients.controller";
 import {
@@ -40,5 +41,6 @@ clientRouter.delete(
   "/:id",
   verifyToken,
   verifyClientIdExists,
-  verifyPermission
+  verifyPermission,
+  softDeleteClientController
 );
