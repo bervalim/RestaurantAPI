@@ -6,6 +6,7 @@ import {
 import {
   createClientService,
   readAllClientsService,
+  softDeleteClientService,
   updateClientService,
 } from "../services/clients.service";
 
@@ -32,4 +33,13 @@ export const updateClientController = async (
   const { findClient } = res.locals;
   const updatedClient = await updateClientService(req.body, findClient);
   return res.status(200).json(updatedClient);
+};
+
+export const softDeleteClientController = async (
+  req: Request,
+  res: Response
+): Promise<Response> => {
+  const { findClient } = res.locals;
+  await softDeleteClientService(findClient);
+  return res.status(204).json();
 };
