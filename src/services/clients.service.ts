@@ -3,6 +3,7 @@ import {
   TcreateClientRequest,
   TcreateClientResponse,
   TreadClientResponse,
+  TupdateClientRequest,
 } from "../interfaces/clients.interface";
 import { clientRepo } from "../repositories";
 import {
@@ -23,4 +24,18 @@ export const createClientService = async (
 export const readAllClientsService = async (): Promise<TreadClientResponse> => {
   const clients: TreadClientResponse = await clientRepo.find();
   return clientsListResponseSchema.parse(clients);
+};
+
+export const updateClientService = async (
+  requestBody: TupdateClientRequest,
+  client: Client
+) => {
+  const updatedClient: Client = clientRepo.create({
+    ...client,
+    ...requestBody,
+  });
+
+  await clientRepo.save(updatedClient);
+
+  return createClientResponseSchema.parse(updatedClient);
 };
