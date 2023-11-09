@@ -20,7 +20,7 @@ export const readAllCategoriesService =
     return categories;
   };
 
-export const readAllRestaurantsByCategories = async (
+export const readAllRestaurantsByCategoriesService = async (
   id: number
 ): Promise<Category> => {
   const category: Category | null = await categoryRepo.findOne({
