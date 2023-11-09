@@ -1,4 +1,5 @@
 import Category from "../entities/Category.entity";
+import AppError from "../errors/App.error";
 import {
   TcategoryRequest,
   TcategoryResponse,
@@ -18,3 +19,20 @@ export const readAllCategoriesService =
     const categories: Category[] = await categoryRepo.find();
     return categories;
   };
+
+export const readAllRestaurantsByCategories = async (
+  id: number
+): Promise<Category> => {
+  const category: Category | null = await categoryRepo.findOne({
+    where: {
+      id: id,
+    },
+    relations: {
+      restaurants: true,
+    },
+  });
+
+  if (!category) throw new AppError("Category not found !", 404);
+
+  return category;
+};
