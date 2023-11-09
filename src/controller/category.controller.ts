@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import {
   createCategoryService,
   readAllCategoriesService,
+  readAllRestaurantsByCategoriesService,
 } from "../services/category.service";
 
 export const createCategoryController = async (
@@ -24,5 +25,9 @@ export const readAllRestaurantsByCategoriesController = async (
   req: Request,
   res: Response
 ): Promise<Response> => {
-  const {};
+  const { id } = req.params;
+  const restaurantsByCategory = await readAllRestaurantsByCategoriesService(
+    Number(id)
+  );
+  return res.status(200).json(restaurantsByCategory);
 };
