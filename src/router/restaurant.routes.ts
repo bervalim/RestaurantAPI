@@ -9,13 +9,15 @@ import {
   createRestaurantController,
   readAllRestaurantsController,
 } from "../controller/restaurant.controller";
+import { verifyRestaurantAddressIsUnique } from "../middlewares/restaurant.middleware";
 
 export const restaurantRouter: Router = Router();
 restaurantRouter.post(
   "/",
-  validateBody(createRestaurantRequestSchema),
   verifyToken,
   verifyAdmin,
+  validateBody(createRestaurantRequestSchema),
+  verifyRestaurantAddressIsUnique,
   createRestaurantController
 );
 restaurantRouter.get("/", readAllRestaurantsController);
