@@ -25,4 +25,11 @@ export const createRestaurantService = async (
   return restaurant;
 };
 
-export const readAllRestautants = async () => {};
+export const readAllRestaurantsService = async (): Promise<Restaurant[]> => {
+  const restaurants: Restaurant[] = await restaurantRepo.find({
+    relations: {
+      address: true,
+    },
+  });
+  return restaurants;
+};
