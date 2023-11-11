@@ -9,12 +9,20 @@ import {
   verifyToken,
 } from "../middlewares/globals.middleware";
 import { createBookingRequestSchema } from "../schemas/bookings.schema";
+import {
+  verifyIfClientBookingRestaurantExists,
+  verifyIfRestaurantBookingExists,
+  verifyRestaurantExists,
+} from "../middlewares/booking.middleware";
 
 export const bookingRouter: Router = Router();
 bookingRouter.post(
   "/",
   verifyToken,
   validateBody(createBookingRequestSchema),
+  verifyRestaurantExists,
+  verifyIfRestaurantBookingExists,
+  verifyIfClientBookingRestaurantExists,
   createBookingAtARestaurantController
 );
 bookingRouter.get(
