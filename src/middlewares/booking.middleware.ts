@@ -10,9 +10,11 @@ export const verifyRestaurantExists = async (
   next: NextFunction
 ): Promise<void> => {
   const { restaurantId } = req.body;
+
   const restaurant: Restaurant | null = await restaurantRepo.findOneBy({
     id: Number(restaurantId),
   });
+
   if (!restaurant)
     throw new AppError("Restaurant not found for this reservation", 404);
 
@@ -25,6 +27,7 @@ export const verifyIfRestaurantBookingExists = async (
   next: NextFunction
 ): Promise<void> => {
   const { date, hour, restaurantId } = req.body;
+
   const booking: Booking | null = await bookingRepo.findOne({
     where: {
       restaurant: {
@@ -44,4 +47,30 @@ export const verifyIfRestaurantBookingExists = async (
   return next();
 };
 
-// export const verify
+export const verifyIfClientBookingRestaurantExists = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { date, hour } = req.body;
+
+  let { sub } = res.locals.decodedToken;
+
+  sub = Number(sub);
+
+  const booking: Booking | null = await bookingRepo.findOne({
+    where: {
+      client: sub,
+      date,
+      hour,
+    },
+  });
+
+  if (!!booking)
+    throw new AppError(
+      "Client Booking At this time and date already exists",
+      409
+    );
+
+  return next();
+};
