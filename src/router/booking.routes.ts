@@ -11,7 +11,6 @@ import {
 import { createBookingRequestSchema } from "../schemas/bookings.schema";
 import {
   verifyIfClientBookingRestaurantExists,
-  verifyIfRestaurantBookingExists,
   verifyRestaurantExists,
 } from "../middlewares/booking.middleware";
 
@@ -21,7 +20,6 @@ bookingRouter.post(
   verifyToken,
   validateBody(createBookingRequestSchema),
   verifyRestaurantExists,
-  verifyIfRestaurantBookingExists,
   verifyIfClientBookingRestaurantExists,
   createBookingAtARestaurantController
 );
