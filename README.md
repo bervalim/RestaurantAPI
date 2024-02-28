@@ -29,14 +29,24 @@
 
 ![DER](./DER.png)
 
-<h2>Passos para a API rodar:</h2>
+<h2>Algumas Regras de negócio</h2>
 
 <ul>
 
+<li>Implementei uma regra que permite reservas apenas durante um determinado horário (11h às 23h), garantindo uma experiência conveniente e segura para todos os envolvidos.</li>
+<li>Clientes não podem ser cadastrados com o mesmo e-mail </li>
+<li>Não podem ser criadas categorias com o mesmo nome</li>
+<li>Restaurantes não podem ser cadastrados com o mesmo endereço</li>
+
+</ul>
+
+<h2>Passos para a API rodar:</h2>
+
+<ul>
 <li>
 Clone o reposítório de forma local
 </li>
 <li>Utilize o comando npm install para instalar todas as dependências</li>
 <li>Utilize o comando npm run typeorm migration:run -- -d ./src/data-source para rodar as migrações </li>
 <li>Para rodar o servidor, utilize o npm run dev</li>
-<ul>
+</ul>
