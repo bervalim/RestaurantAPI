@@ -25,6 +25,10 @@
 | POST   | /bookings                    | Faz uma reserva a um restaurante                           | Qualquer cliente,token é obrigatório     |
 | GET    | /bookings/restaurant/{id}    | Lista todos as reservas de um restaurante                  | Apenas Administradores                   |
 
+## Diagrama de Entidades e Relacionamentos:
+
+![DER](./DER.png)
+
 <h2>Passos para a API rodar:</h2>
 
 <ul>
