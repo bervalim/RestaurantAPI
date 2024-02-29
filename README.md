@@ -49,4 +49,14 @@ Clone o reposítório de forma local
 <li>Utilize o comando npm install para instalar todas as dependências</li>
 <li>Utilize o comando npm run typeorm migration:run -- -d ./src/data-source para rodar as migrações </li>
 <li>Para rodar o servidor, utilize o npm run dev</li>
-</ul>
+</ul> 
+
+## Contribuição
+Este projeto é open source  qualquer contribuição sempre será bem-vinda. Vamos aprender juntos e espalhar conhecimento.Peça permissão para que possas fazer os commits. 
+
+## Contato:
+<h3>Alguma dúvida sobre o projeto ou deseja contribuir de algumas forma?
+</h3> 
+
+-bernardogvalim@gmail.com
+-https://www.linkedin.com/in/bernardo-valim/
